@@ -2,16 +2,17 @@
 import { useState, useEffect } from "react";
 import GameTile from "./GameTile";
 
-// Типы игровых элементов
-type TileType = "samosa" | "curry" | "chai" | "naan" | "mango" | "lotus";
+// Типы игровых элементов с древнерусской тематикой
+type TileType = "alatyr" | "svarog" | "perun" | "veles" | "yarilo" | "makosh";
 
 interface GameBoardProps {
   onScoreUpdate: (points: number) => void;
   onMoveMade: () => void;
   level: number;
+  disabled: boolean;
 }
 
-const GameBoard = ({ onScoreUpdate, onMoveMade, level }: GameBoardProps) => {
+const GameBoard = ({ onScoreUpdate, onMoveMade, level, disabled }: GameBoardProps) => {
   const boardSize = 8;
   const [board, setBoard] = useState<TileType[][]>([]);
   const [selectedTile, setSelectedTile] = useState<{row: number, col: number} | null>(null);
@@ -19,7 +20,7 @@ const GameBoard = ({ onScoreUpdate, onMoveMade, level }: GameBoardProps) => {
   const [isCheckingMatches, setIsCheckingMatches] = useState(false);
   
   // Элементы для игрового поля
-  const tileTypes: TileType[] = ["samosa", "curry", "chai", "naan", "mango", "lotus"];
+  const tileTypes: TileType[] = ["alatyr", "svarog", "perun", "veles", "yarilo", "makosh"];
   
   // Инициализация игрового поля
   useEffect(() => {
@@ -60,7 +61,7 @@ const GameBoard = ({ onScoreUpdate, onMoveMade, level }: GameBoardProps) => {
   
   // Обработка выбора плитки
   const handleTileClick = (row: number, col: number) => {
-    if (isSwapping || isCheckingMatches) return;
+    if (disabled || isSwapping || isCheckingMatches) return;
     
     if (selectedTile === null) {
       // Первый выбор
@@ -186,9 +187,9 @@ const GameBoard = ({ onScoreUpdate, onMoveMade, level }: GameBoardProps) => {
       }
       
       // Даем больше очков за большие комбинации
-      let points = matchCount * 10;
-      if (matchCount >= 4) points += 50;
-      if (matchCount >= 5) points += 100;
+      let points = matchCount * 15;
+      if (matchCount >= 4) points += 60;
+      if (matchCount >= 5) points += 120;
       
       // Умножаем на уровень для увеличения сложности
       points *= level;
@@ -282,7 +283,7 @@ const GameBoard = ({ onScoreUpdate, onMoveMade, level }: GameBoardProps) => {
   };
   
   return (
-    <div className="grid grid-cols-8 gap-1 bg-amber-100 p-2 rounded-lg shadow-inner">
+    <div className="grid grid-cols-8 gap-1 bg-slate-800 p-2 rounded-lg shadow-inner border border-amber-500/20">
       {board.map((row, i) => 
         row.map((tile, j) => (
           <GameTile 
@@ -290,6 +291,7 @@ const GameBoard = ({ onScoreUpdate, onMoveMade, level }: GameBoardProps) => {
             type={tile} 
             isSelected={selectedTile?.row === i && selectedTile?.col === j}
             onClick={() => handleTileClick(i, j)}
+            disabled={disabled}
           />
         ))
       )}

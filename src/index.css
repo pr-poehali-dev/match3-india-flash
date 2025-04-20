@@ -1,115 +1,87 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 40 70% 97%;
-    --foreground: 30 10% 15%;
-
-    --card: 40 33% 98%;
-    --card-foreground: 30 10% 15%;
-
-    --popover: 40 33% 98%;
-    --popover-foreground: 30 10% 15%;
-
-    --primary: 32 95% 44%;
-    --primary-foreground: 40 33% 98%;
-
-    --secondary: 35 91% 90%;
-    --secondary-foreground: 30 10% 15%;
-
-    --muted: 35 50% 95%;
-    --muted-foreground: 30 10% 40%;
-
-    --accent: 25 95% 90%;
-    --accent-foreground: 30 10% 15%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 40 33% 98%;
-
-    --border: 30 15% 90%;
-    --input: 30 15% 90%;
-    --ring: 32 95% 44%;
-
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 45 93% 47%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 45 93% 47%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 45 93% 47%;
+    
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 30 10% 10%;
-    --foreground: 40 33% 98%;
-
-    --card: 30 10% 12%;
-    --card-foreground: 40 33% 98%;
-
-    --popover: 30 10% 12%;
-    --popover-foreground: 40 33% 98%;
-
-    --primary: 32 95% 44%;
-    --primary-foreground: 40 33% 98%;
-
-    --secondary: 30 15% 20%;
-    --secondary-foreground: 40 33% 98%;
-
-    --muted: 30 15% 20%;
-    --muted-foreground: 30 10% 70%;
-
-    --accent: 30 15% 20%;
-    --accent-foreground: 40 33% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 40 33% 98%;
-
-    --border: 30 15% 20%;
-    --input: 30 15% 20%;
-    --ring: 32 95% 44%;
-
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
+    /* Animation keyframes */
+    --fade-in-duration: 0.3s;
+    --fade-out-duration: 0.3s;
+    --scale-duration: 0.2s;
   }
 }
 
 @layer utilities {
-  @keyframes fade-in {
-    0% { opacity: 0; transform: scale(0.8); }
-    100% { opacity: 1; transform: scale(1); }
-  }
-  
-  @keyframes fade-out {
-    0% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0.8); }
-  }
-  
   .animate-fade-in {
-    animation: fade-in 0.3s ease-out;
+    animation: fadeIn var(--fade-in-duration) ease-out;
   }
   
   .animate-fade-out {
-    animation: fade-out 0.3s ease-out;
+    animation: fadeOut var(--fade-out-duration) ease-out;
   }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+body {
+  background-color: #0f172a;
+  color: #f8fafc;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h1, h2, h3, .font-playfair {
+  font-family: 'Playfair Display', serif;
 }

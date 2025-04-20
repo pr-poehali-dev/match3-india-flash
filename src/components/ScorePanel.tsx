@@ -1,4 +1,5 @@
 
+import { Star, ZapIcon, Timer } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 
 interface ScorePanelProps {
@@ -8,37 +9,38 @@ interface ScorePanelProps {
 }
 
 const ScorePanel = ({ score, level, moves }: ScorePanelProps) => {
-  // Расчет прогресса для текущего уровня
-  const levelProgress = Math.min(100, (score / (level * 1000)) * 100);
+  // Расчет прогресса к следующему уровню
+  const progressToNextLevel = Math.min(100, (score / (level * 1000)) * 100);
   
   return (
-    <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-3 shadow-inner">
-      <div className="grid grid-cols-3 gap-2 mb-3">
-        <div className="text-center">
-          <div className="text-amber-800 font-bold text-lg">{score}</div>
-          <div className="text-amber-600 text-xs">Очки</div>
+    <div className="bg-slate-800 rounded-lg p-3 shadow-inner border border-amber-500/20">
+      <div className="flex justify-between mb-3">
+        <div className="flex items-center">
+          <Star className="h-5 w-5 text-amber-400 mr-1" />
+          <span className="text-amber-100 text-sm font-medium">Сила:</span>
+          <span className="text-amber-400 font-bold ml-1">{score}</span>
         </div>
         
-        <div className="text-center">
-          <div className="text-amber-800 font-bold text-lg">{level}</div>
-          <div className="text-amber-600 text-xs">Уровень</div>
+        <div className="flex items-center">
+          <ZapIcon className="h-5 w-5 text-amber-400 mr-1" />
+          <span className="text-amber-100 text-sm font-medium">Уровень:</span>
+          <span className="text-amber-400 font-bold ml-1">{level}</span>
         </div>
         
-        <div className="text-center">
-          <div className="text-amber-800 font-bold text-lg">{moves}</div>
-          <div className="text-amber-600 text-xs">Ходы</div>
+        <div className="flex items-center">
+          <Timer className="h-5 w-5 text-amber-400 mr-1" />
+          <span className="text-amber-100 text-sm font-medium">Ходы:</span>
+          <span className={`font-bold ml-1 ${moves <= 5 ? 'text-red-400' : 'text-amber-400'}`}>{moves}</span>
         </div>
       </div>
       
-      <div className="space-y-1">
-        <div className="flex justify-between items-center text-xs text-amber-700">
-          <span>Прогресс уровня</span>
-          <span>{Math.floor(levelProgress)}%</span>
+      <div>
+        <div className="flex justify-between items-center text-xs text-amber-200 mb-1">
+          <span>Прогресс</span>
+          <span>{Math.round(progressToNextLevel)}%</span>
         </div>
-        <Progress 
-          value={levelProgress} 
-          className="h-2 bg-amber-100" 
-        />
+        <Progress value={progressToNextLevel} className="h-2 bg-slate-700" 
+          indicatorClassName="bg-gradient-to-r from-amber-400 to-amber-500" />
       </div>
     </div>
   );
